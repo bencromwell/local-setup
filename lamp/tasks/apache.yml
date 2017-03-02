@@ -1,0 +1,15 @@
+---
+#- name: development projects directory
+#  file:
+#    state: directory
+#    dest: "{{ ansible_env.HOME }}/projects"
+
+- name: setup projects.local vhost
+  template:
+    src: projects.conf.j2
+    dest: /etc/apache2/sites-available/projects.conf
+  notify: restart apache
+
+- name: enable site
+  shell: a2ensite projects.conf
+  notify: restart apache

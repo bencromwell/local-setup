@@ -1,0 +1,14 @@
+<VirtualHost *:80>
+
+    DocumentRoot {{ ansible_env.HOME }}/projects/
+    ServerAlias projects.local
+
+    SetEnv APPLICATION_ENV development
+
+    <Directory {{ ansible_env.HOME }}/projects/>
+        Options Indexes FollowSymLinks MultiViews
+        AllowOverride All
+        Require all granted
+    </Directory>
+
+</VirtualHost>

@@ -1,0 +1,5 @@
+---
+# vars file for lamp
+xdebug_dest: /etc/php/7.0/mods-available/xdebug.ini
+xdebug_port: 9000
+xdebug_idekey: PHPSTORM

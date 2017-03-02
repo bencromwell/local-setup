@@ -1,0 +1,6 @@
+---
+- name: configure xdebug for phpstorm
+  template:
+    src: xdebug.ini.j2
+    dest: "{{ xdebug_dest }}"
+  notify: restart apache

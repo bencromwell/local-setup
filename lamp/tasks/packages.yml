@@ -1,0 +1,14 @@
+---
+- name: install packages
+  apt:
+    name: "{{ item }}"
+  with_items:
+    - php
+    - php-cli
+    - php-xdebug
+    - mysql-server
+    - mysql-client
+    - apache2
+    - libapache2-mod-php
+    - httpie
+    - jq

@@ -2,3 +2,5 @@
 - hosts: localhost
   roles:
     - git
+    - { name: lamp, become: yes, become_user: root }
+    - composer
