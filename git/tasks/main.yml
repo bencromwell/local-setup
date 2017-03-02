@@ -1,2 +1,11 @@
 ---
 # tasks file for git
+- name: Splat in the git config
+  template:
+    src: gitconfig.j2
+    dest: "{{ ansible_env.HOME }}/.gitconfig"
+
+- name: Splat in the global gitignore
+  template:
+    src: gitignore.j2
+    dest: "{{ ansible_env.HOME }}/.gitignore"

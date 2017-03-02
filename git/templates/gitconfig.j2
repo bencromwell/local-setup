@@ -1,0 +1,55 @@
+# {{ ansible_managed }}
+
+[user]
+    name = {{ git_name }}
+    email = {{ git_email }}
+
+[color]
+    ui = auto
+
+[alias]
+    # laziness and typos
+    st = status
+    co = checkout
+    ci = commit
+    rb = branch
+    pop = stash pop
+    amend = commit --amend
+    squash = rebase -i HEAD~2
+
+    # logs
+    lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+    lg2 = log --graph --pretty=format:'%Cred%h%Creset %Cgreen%an%Creset:%C(yellow)%d%Creset %s %Cblue%cr %C(magenta)%Creset'
+    today = log --since=1.day --all --graph  --format='%Cred%h%Creset - %C(yellow)%an:%Creset %s %Cgreen(%ar)%Creset%C(magenta)%d%Creset'
+
+    # work in progress
+    wip = "!f() { git add -A; git ls-files --deleted -z | xargs -0 git rm; export tmp_branch=`git branch | grep '* ' | tr -d '* '` && git commit -m \"$tmp_branch - wip\"; unset tmp_branch; }; f"
+    unwip = "!f() { git log -n 1 | grep -q -c wip && git reset HEAD~1; }; f"
+
+    # pushing
+    pushnew = "!f() { export tmp_branch=`git branch | grep '* ' | tr -d '* '` && git push origin $tmp_branch; unset $tmp_branch; }; f"
+    bpu = "!f() { git checkout -b $1 && git upstream $1; }; f"
+    safepush = "!f() { export tmp_branch=`git branch | grep '* ' | tr -d '* '` && git push -f origin $tmp_branch; unset tmp_branch; }; f"
+
+    # archive an old branch, tag it and remove it from origin and local
+    tagarchive = "!f() { git tag archive/$1 origin/$1 && git push origin :$1 && git push origin archive/$1 && git branch -d $1; }; f"
+
+    # branches
+    freshbranch = "!f() { export tmp_branch=`git branch | grep '* ' | tr -d '* '` && git checkout master && git branch -d $tmp_branch && git checkout $tmp_branch ; unset tmp_branch; }; f"
+    merge-to = "!gitmergeto() { export tmp_branch=`git branch | grep '* ' | tr -d '* '` && git checkout $1 && git merge $tmp_branch && git checkout $tmp_branch; unset tmp_branch; }; gitmergeto"
+
+    # Show files ignored by git
+    ign = ls-files -o -i --exclude-standard
+
+[mergetool]
+    keepBackup = false
+
+[core]
+    excludesfile = {{ ansible_env.HOME }}/.gitignore
+    editor = nano -r 72
+
+[rerere]
+    enabled = 1
+
+[push]
+    default = simple
