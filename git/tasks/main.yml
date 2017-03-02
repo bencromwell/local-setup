@@ -20,4 +20,5 @@
     name: "{{ item }}"
   with_items:
     - gitg
+    - nano
 #    - git
