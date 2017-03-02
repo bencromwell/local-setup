@@ -9,3 +9,15 @@
   template:
     src: gitignore.j2
     dest: "{{ ansible_env.HOME }}/.gitignore"
+
+#- name: Add git-core PPA
+#  apt_repository:
+#    repo: 'ppa:git-core/ppa'
+#    update_cache: yes
+
+- name: Install supporting packages
+  apt:
+    name: "{{ item }}"
+  with_items:
+    - gitg
+#    - git
