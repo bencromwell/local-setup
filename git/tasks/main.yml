@@ -10,6 +10,11 @@
     src: gitignore.j2
     dest: "{{ ansible_env.HOME }}/.gitignore"
 
+- name: Splat in the git commit message template
+  copy:
+    src: gitmessage
+    dest: "{{ ansible_env.HOME }}/.gitmessage"
+
 #- name: Add git-core PPA
 #  apt_repository:
 #    repo: 'ppa:git-core/ppa'
