@@ -21,7 +21,9 @@
     lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
     lg2 = log --graph --pretty=format:'%Cred%h%Creset %Cgreen%an%Creset:%C(yellow)%d%Creset %s %Cblue%cr %C(magenta)%Creset'
     today = log --since=1.day --all --graph  --format='%Cred%h%Creset - %C(yellow)%an:%Creset %s %Cgreen(%ar)%Creset%C(magenta)%d%Creset'
-    mybranches = for-each-ref --sort='-committerdate' --format='%(color: red)%(objectname:short)%(color: reset) - %(committerdate:short) - %(color: yellow)%(refname:short)%(color: reset) %(color: green)(%(committerdate:relative))%(color: reset)%(if)%(upstream)%(then) (%(upstream:short))%(end)' refs/heads
+    brs = for-each-ref --sort='-committerdate' --format='%(color: red)%(objectname:short)%(color: reset) - %(committerdate:short) - %(color: yellow)%(refname:short)%(color: reset) %(color: green)(%(committerdate:relative))%(color: reset$
+    mybranches = "!f() { git brs refs/heads; }; f"
+    remotebranches = "!f() { git brs refs/remotes/origin; }; f"
 
     # work in progress
     wip = "!f() { git add -A; git ls-files --deleted -z | xargs -0 git rm; export tmp_branch=`git branch | grep '* ' | tr -d '* '` && git commit -m \"$tmp_branch - wip\"; unset tmp_branch; }; f"
