@@ -1,6 +1,6 @@
 ---
 - hosts: localhost
   roles:
-    - git
-    - { name: lamp, become: yes, become_user: root }
-    - composer
+    - { name: git, tags: git }
+    - { name: lamp, become: yes, become_user: root, tags: lamp }
+    - { name: composer, tags: php }

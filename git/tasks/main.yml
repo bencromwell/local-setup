@@ -27,3 +27,4 @@
     - gitg
     - nano
 #    - git
+  become: yes

@@ -21,7 +21,7 @@
     lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
     lg2 = log --graph --pretty=format:'%Cred%h%Creset %Cgreen%an%Creset:%C(yellow)%d%Creset %s %Cblue%cr %C(magenta)%Creset'
     today = log --since=1.day --all --graph  --format='%Cred%h%Creset - %C(yellow)%an:%Creset %s %Cgreen(%ar)%Creset%C(magenta)%d%Creset'
-    brs = for-each-ref --sort='-committerdate' --format='%(color: red)%(objectname:short)%(color: reset) - %(committerdate:short) - %(color: yellow)%(refname:short)%(color: reset) %(color: green)(%(committerdate:relative))%(color: reset$
+    brs = for-each-ref --sort='-committerdate' --format='%(color: red)%(objectname:short)%(color: reset) - %(committerdate:short) - %(color: yellow)%(refname:short)%(color: reset) %(color: green)(%(committerdate:relative))%(color: reset)%(if)%(upstream)%(then) (%(upstream:short))%(end)'
     mybranches = "!f() { git brs refs/heads; }; f"
     remotebranches = "!f() { git brs refs/remotes/origin; }; f"
 
