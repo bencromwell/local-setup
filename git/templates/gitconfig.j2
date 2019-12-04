@@ -43,6 +43,8 @@
 
     # Show files ignored by git
     ign = ls-files -o -i --exclude-standard
+    # Show untracked files
+    untracked = ls-files --others -o --exclude-standard
 
 [mergetool]
     keepBackup = false
